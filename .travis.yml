@@ -1,0 +1,20 @@
+# everytime we use Docker, we need super-user level permissions
+sudo: required
+# services that travisCI will install in the background
+services:
+  - docker
+# commands that will be executed to prepare the setup before
+# main purpose command is executed
+# (i.e we need the image to be generated before we try running a test)
+before_install:
+  # we must tag this image so that we can access throughout this config file
+  # name doesn't matter as it will only be saved through the execution of this
+  # travisCI workflow
+  - docker build -t rgomezrx/docker-react -f Dockerfile.dev .
+# supposed to contain all the list of commands to be executed
+# to check that all scripts run ok - travisCI will be checking
+# the output of every script specified and will only allow
+# 0 (success) to be returned; Otherwise it will output that tests
+# have not been passed
+script:
+  - docker run -e CI=true rgomezrx/docker-react npm run test
