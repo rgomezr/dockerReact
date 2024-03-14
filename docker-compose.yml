@@ -1,39 +1,8 @@
-# docker compose file version
 version: '3'
-# services breakdown
 services:
-  # container typed service
-  reactwebapp:
-    # specification of context and docker file required to build image
-    # by default, build . will look for a non-dev Dockerfile
+  web:
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    # mapping local machine's port 3000 with container's port 3000
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
-    # mapping the below volumes
-    volumes:
-      # Bookmarking the /app/node_models folder in the container's FS
-      # so that it does not override when mouting pwd into /app
-      # '-' in docker-compose represents an array
-      - /app/node_modules
-      # Mounting current directory (pwd) into container's /app
-      - .:/app
-  # contianer typed service (prod)
-  webprod:
-    # Will use by default Dockerfile to build the image for this service
-    build: .
-    # mapping local's machine 3001 with container's 80 (default's nginx port)
-    ports:
-      - "3001:80"
-  # webapptesting:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.dev
-  #   volumes:
-  #     - /app/node_modules
-  #     - .:/app
-  #   # this allow us to specify the command we want the service to execute when
-  #   # it starts up - it will override the one specified in the Dockerfile
-  #   command: ["npm", "run", "test"]
+      - "80:80"
