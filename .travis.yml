@@ -18,3 +18,15 @@ before_install:
 # have not been passed
 script:
   - docker run -e CI=true rgomezrx/docker-react npm run test
+
+deploy:
+  on:
+    branch: master
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "frontend"
+  env: "Frontend-env"
+  bucket_name: "elasticbeanstalk-eu-north-1-381492118784"
+  bucket_path: "frontend"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
