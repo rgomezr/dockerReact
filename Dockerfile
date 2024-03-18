@@ -27,6 +27,11 @@ CMD [ "npm", "run", "build" ]
 # use this in a later stage - just looks tidy
 FROM nginx as runPhase
 
+# to developers, this is only informative specifying that,
+# a mapping should be built with port 80 from the container
+# and not another one
+EXPOSE 80
+
 # in this new temporary container, there's no /app/build
 # this was done in previous stage buildPhase and therefore
 # it is in the FS of that temporary container
