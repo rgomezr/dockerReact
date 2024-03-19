@@ -19,7 +19,6 @@ COPY . .
 
 # running npm run build to generate a static build folder
 # with all static files required to serve inbound browser traffic
-CMD [ "npm", "run", "build" ]
 RUN npm run build
 
 # when we specify a second FROM within a Dockerfile
